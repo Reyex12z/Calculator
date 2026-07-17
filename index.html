@@ -4,21 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/mathjs@14.0.1/lib/browser/math.js"></script>
+    <script src="script.js" defer></script>
     <title>Calculator</title>
 </head>
 <body>
     <main>
         <section class="calculator">
             <div class="cal-display">
-                <p> 5 X 5 + 25</p>
+                <p></p>
             </div>
 
             <div class="cal-content">
                 <div class="cal-content-top">
-                    <button class="cal-content-top-btn"> C </button>
-                    <button class="cal-content-top-btn"> x² </button>
-                    <button class="cal-content-top-btn"> √x </button>
-                    <button class="cal-content-top-btn"> ⌫ </button>
+                    <button class="cal-content-top-btn" style="color: rgba(255, 0, 0, 0.795);" id="clear"> C </button>
+                    <button class="cal-content-top-btn" id="square"> x² </button>
+                    <button class="cal-content-top-btn" id="root"> √x </button>
+                    <button class="cal-content-top-btn" id="backSpace"> ⌫ </button>
                 </div>
 
                 <!-- contains numbers and operators container each-->
@@ -43,8 +45,10 @@
                             <button class="cal-num"> 1 </button>                            
                         </div>
 
-                        <div class="cal-nums-row-last">
-                            <button class="cal-num" id="num-zero"> 0 </button>                            
+                        <div class="cal-nums-row">
+                            <button class="cal-num" id="dbzero">00</button>
+                            <button class="cal-num" id="num-zero"> 0 </button>
+                            <button class="cal-num" id="dot"> . </button>                            
                         </div>
 
                     </div>
@@ -52,10 +56,10 @@
                     <div class="calc-operations">
                         <button class="cal-operator"> + </button>
                         <button class="cal-operator"> - </button>
-                        <button class="cal-operator"> x </button>
-                        <button class="cal-operator"> % </button>
-                        <button class="cal-operator"> . </button>
-                        <button class="cal-operator"> = </button>
+                        <button class="cal-operator"> × </button>
+                        <button class="cal-operator"> ÷ </button>
+                        
+                        <button class="cal-operator" id="equals"> = </button>
                     </div>
                 </div>
 
