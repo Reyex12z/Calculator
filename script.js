@@ -11,13 +11,30 @@ num.addEventListener("click", function(event) {
       if (event.target.tagName === 'BUTTON') {
 
         if (!(event.target.id === "dot")) {
-          display.textContent += event.target.textContent.trim();
+
+          // if there is empty space before number swap with x
+          if ((display.textContent.slice(-1) === " ") && (display.textContent.at(-2) === "²")) {
+            display.textContent += "×" + event.target.textContent.trim();
+          }
+
+          else {
+            display.textContent += event.target.textContent.trim();
+          }
         } 
 
-        // adds dot only once
+        // adds dot only once per operator
         else {
-          if (!(display.textContent.slice(-1) === ".")) {
-            display.textContent += event.target.textContent.trim();
+          
+          // Get the current text
+          let currentText = display.textContent;
+          // Split the text at operators (assuming operators are +, -, *, /)
+          let numbers = currentText.split(/[\+\-\*\/]/);
+          // Get the active/current number (the last one in the array)
+          let activeNumber = numbers[numbers.length - 1];
+
+          // Add the dot only if the active number doesn't already have one
+          if (!activeNumber.includes(".")) {
+              display.textContent += event.target.textContent.trim();
           }
         }
 
@@ -33,12 +50,12 @@ operator.addEventListener("click", function(event) {
 
     //  if last item is operator then swap
     if (lastChar === "+" || lastChar === "-" || lastChar === "×" || lastChar === "÷") {
-      display.textContent = display.textContent.slice(0, -2) +  event.target.textContent;
+      display.textContent = display.textContent.slice(0, -2) +  event.target.textContent.trim() + " ";
     }
 
     // if not, add operator
     else {
-      display.textContent += event.target.textContent;
+      display.textContent += " " + event.target.textContent.trim() + " ";
     }
   }
 
@@ -70,12 +87,14 @@ calculatorKeys.addEventListener("click", function(event) {
         
         // if clicked button is square
         if (event.target.id === "square") {
-          display.textContent = display.textContent.slice(0, -1) +  "²";
+          if (!(display.textContent.at(-1) === " ")) {
+            display.textContent = display.textContent.trim().slice(0, -1) +  "² ";
+          }
         }
 
         // if clicked button is root
         else {
-          display.textContent = display.textContent.slice(0, -1) +  "√";
+          display.textContent = display.textContent.trim().slice(0, -1) +  " √";
         }
       }
 
@@ -84,14 +103,14 @@ calculatorKeys.addEventListener("click", function(event) {
 
         // if clicked button is square
         if (event.target.id === "square") {
-          if (!(display.textContent.trim() === "")) {
-            display.textContent += "²";
+          if (!(display.textContent.trim() === "") && !(display.textContent.at(-1) === " ")) {
+            display.textContent += "² ";
           }
         }
 
         // if clicked button is root
         else if (event.target.id === "root") {
-          display.textContent += "√";
+          display.textContent += " √";
         }
       }
       
